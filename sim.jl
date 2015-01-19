@@ -1,40 +1,35 @@
-function calc_autocorrelation(fbms)
-  #calc autocorrelation of the fbms
-  #also want them in a graphical format, but that's not too important
-end
+using Distributions 
 
 function normalize(arr)
-  arr_min = np.min(arr) ######################
-  arr_max = np.max(arr) ######################
+  arr_min = minimum(arr)
+  arr_max = maximum(arr)
   rng = arr_max - arr_min
-  return 1 - ((arr_max - arr) / rng)
+  1 - ((arr_max - arr) / rng)
 end
 
-function gen_one_fbm(dim_len=2000)
-  times = range(1, dim_len + 1) ######################
-  gamma = np.zeros((dim_len, dim_len)) ######################
+function gen_one_fbm(dim_len)
+  times = 1:(dim_len+1)
+  gamma = zeros((dim_len, dim_len))
   h = 0.8
   double_h = h * 2
-  for i in times: ######################
-    for j in times: ######################
-      gamma[i-1, j-1] = (i ** (double_h) + j ** (double_h) - (abs(j - i) ** double_h)) / 2 ######################
+  for i in 1:(dim_len)
+    for j in 1:(dim_len)
+      gamma[i, j] = (i ^ (double_h) + j ^ (double_h) - (abs(j - i) ^ double_h)) / 2 ## right indices?
     end
   end
-  sigma = np_lin.cholesky(gamma) ######################
-  vec = npr.normal(size=(dim_len,)) ######################
-  u = np.dot(sigma, vec) ######################
-  u = normalize(u) ######################
-  return u
+  sigma = chol(gamma)
+  vec = rand(Normal(), dim_len)
+  u = *(sigma, vec)
+  u = normalize(u)
+  u
 end
 
-function gen_fbms(num=3000)
-  dim_len = 2000
-  fbms = np.zeros(dim_len) ######################
-  for x in xrange(num): ######################
-    fbms = np.hstack((fbms, gen_one_fbm(dim_len))) ######################
-    print x ######################
-  end
-  return fbms
+function gen_fbms(num=300)
+  dim_len = 200
+  fbms = [gen_one_fbm(dim_len) for x in 1:num]
 end
 
-println(gen_fbms())
+genned = gen_fbms()
+f = open("genned_fbms.jld", "w")
+serialize(f, genned)
+
