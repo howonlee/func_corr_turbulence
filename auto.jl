@@ -1,8 +1,7 @@
 using Distributions
-
-function autocorrelation(fbms)
-  #stuff
-end
+using PyPlot
 
 f = open("genned_fbms.jld", "r")
 genned = deserialize(f)
+plt.plot(genned[1])
+plt.savefig("genned")

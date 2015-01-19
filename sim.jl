@@ -32,4 +32,3 @@ end
 genned = gen_fbms()
 f = open("genned_fbms.jld", "w")
 serialize(f, genned)
-
