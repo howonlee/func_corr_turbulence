@@ -1,7 +1,12 @@
 using Distributions
-using PyPlot
 
 f = open("genned_fbms.jld", "r")
 genned = deserialize(f)
-plt.plot(genned[1])
-plt.savefig("genned")
+
+function corr(first, second)
+  ## correlation between two voxels
+end
+
+function automat(mat)
+  ## whole autocorrelation matrix
+end
