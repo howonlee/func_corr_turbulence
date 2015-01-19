@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import h5py
 
-f = h5py.File("mhd1024.h5", "r")
+f = h5py.File("isotropic1024fine.h5", "r")
 total_array = np.array([0,0,0])
 for name in f:
     last_arr = np.squeeze(f[name][...])
