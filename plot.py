@@ -24,7 +24,6 @@ def binary_return_map(vals, num_pts=1000, cutoff=500):
     plt.show()
     plt.savefig("turb_binary_retmap")
 
-
 if __name__ == "__main__":
     turb_data = []
     with open("turb.dat", "r") as turb_file:
