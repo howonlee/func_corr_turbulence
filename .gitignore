@@ -1,4 +1,7 @@
 *.h5
 *.pyc
 *.jld
+*.plt
 *.edgelist
+turb.edgelist
+*.tab

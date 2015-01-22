@@ -8,7 +8,7 @@ def make_net(fname="turb.dat"):
         dat = map(int, net_file.read().split())
     return dat
 
-def save_retmap(vals, num_points=1000, cutoff=300):
+def save_retmap(vals, num_points=1000, cutoff=900):
     ret_mat = np.zeros((num_points, num_points))
     #probably a vectorized way to do it
     for x in xrange(num_points):
@@ -22,4 +22,4 @@ def load_graph(fname="turb.edgelist"):
     return nx.read_edgelist(fname)
 
 if __name__ == "__main__":
-    net = load_graph()
+    save_retmap(make_net())
