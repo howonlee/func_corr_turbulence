@@ -5,7 +5,7 @@ def load(fname="turb.edgelist"):
 
 def plot_degrees(net, fname="turb", desc="degrees"):
     snap.PlotInDegDistr(net, fname, desc, False, True)
-    snap.PlotOutDegDistr(net, fname, desc, False, True)
+    #snap.PlotOutDegDistr(net, fname, desc, False, True)
 
 if __name__ == "__main__":
     net = load()

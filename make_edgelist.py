@@ -18,8 +18,18 @@ def save_retmap(vals, num_points=1000, cutoff=900):
     net = nx.from_numpy_matrix(ret_mat)
     nx.write_edgelist(net, "turb.edgelist", data=False)
 
+def save_poincare(vals):
+    max_vals = max(vals)
+    vals1 = vals[:len(vals)-1]
+    vals2 = vals[1:]
+    mat = np.zeros((max_vals+1, max_vals+1))
+    for first, second in zip(vals1, vals2):
+        mat[first, second] += 1
+    net = nx.from_numpy_matrix(mat)
+    nx.write_edgelist(net, "turb.edgelist", data=False)
+
 def load_graph(fname="turb.edgelist"):
     return nx.read_edgelist(fname)
 
 if __name__ == "__main__":
-    save_retmap(make_net())
+    save_poincare(make_net())
